@@ -1,0 +1,13 @@
+        
+        Web Notes
+        
+ ___________________
+/ Executive summary \____________________________________
+
+ - sharable account driven note taking system
+ - Pen/Touch
+   + can draw with many brushes, and colors.
+ - mouse/keyboard
+   + can draw with primitives and text.
+ - able to be saved and managed from a user's interface
+
