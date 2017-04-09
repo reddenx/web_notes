@@ -115,10 +115,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Framework\ConfigurationSettings.cs" />
+    <Compile Include="Data\CachedDataAccess.cs" />
+    <Compile Include="Framework\SiteConfiguration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dtos\AccountInfoDto.cs" />
+    <Compile Include="Models\Dtos\NoteDto.cs" />
+    <Compile Include="Models\Dtos\NoteListDto.cs" />
+    <Compile Include="Models\Entities\Note.cs" />
+    <Compile Include="Models\Entities\UserAccount.cs" />
+    <Compile Include="Models\Persistence\DataRepository.cs" />
+    <Compile Include="Models\Persistence\NoteData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

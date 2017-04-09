@@ -7,6 +7,8 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
+using WebNotesSite.Data;
+using WebNotesSite.Framework;
 
 namespace WebNotesSite
 {
@@ -17,6 +19,9 @@ namespace WebNotesSite
             // Code that runs on application startup
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            var config = new SiteConfiguration();
+            CachedDataAccess.Initialize(config.TypecacheStorageDirectory);
         }
     }
 }
