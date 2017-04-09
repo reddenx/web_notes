@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using WebNotesSite.Data;
 using WebNotesSite.Framework;
-using WebNotesSite.Models.Dtos;
 using WebNotesSite.Models.Persistence;
 
 namespace WebNotesSite.Controllers

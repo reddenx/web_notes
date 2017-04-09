@@ -16,5 +16,7 @@ namespace WebNotesSite.Models.Entities
         public TextElement[] TextElements { get; private set; }
         public LineElement[] LineElements { get; private set; }
         public Stroke[] Strokes { get; private set; }
+
+        public BrushColor BackgroundColor { get; private set; }
     }
 }
