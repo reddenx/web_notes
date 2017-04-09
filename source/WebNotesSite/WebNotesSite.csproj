@@ -120,10 +120,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Dtos\AccountInfoDto.cs" />
-    <Compile Include="Models\Dtos\NoteDto.cs" />
-    <Compile Include="Models\Dtos\NoteListDto.cs" />
+    <Compile Include="Models\DataTypes\AccountCredentials.cs" />
+    <Compile Include="Models\DataTypes\AccountProfile.cs" />
+    <Compile Include="Models\DataTypes\BrushColor.cs" />
+    <Compile Include="Models\DataTypes\BrushSize.cs" />
+    <Compile Include="Models\DataTypes\NoteName.cs" />
+    <Compile Include="Models\DataTypes\Vector2.cs" />
+    <Compile Include="Models\Entities\LineElement.cs" />
     <Compile Include="Models\Entities\Note.cs" />
+    <Compile Include="Models\Entities\Stroke.cs" />
+    <Compile Include="Models\Entities\TextElement.cs" />
     <Compile Include="Models\Entities\UserAccount.cs" />
     <Compile Include="Models\Persistence\DataRepository.cs" />
     <Compile Include="Models\Persistence\NoteData.cs" />
