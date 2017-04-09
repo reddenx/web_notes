@@ -111,11 +111,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\AccountController.cs" />
     <Compile Include="Api\HomeApiController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\CachedDataAccess.cs" />
+    <Compile Include="Framework\ApiCookieAuthorizeAttribute.cs" />
+    <Compile Include="Framework\AuthorizationHelper.cs" />
+    <Compile Include="Framework\CookieAuthorizationAttribute.cs" />
     <Compile Include="Framework\SiteConfiguration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -125,12 +129,15 @@
     <Compile Include="Models\DataTypes\BrushColor.cs" />
     <Compile Include="Models\DataTypes\BrushSize.cs" />
     <Compile Include="Models\DataTypes\NoteName.cs" />
+    <Compile Include="Models\DataTypes\SharedNoteRelationship.cs" />
     <Compile Include="Models\DataTypes\Vector2.cs" />
+    <Compile Include="Models\Dtos\AccountDto.cs" />
     <Compile Include="Models\Entities\LineElement.cs" />
     <Compile Include="Models\Entities\Note.cs" />
     <Compile Include="Models\Entities\Stroke.cs" />
     <Compile Include="Models\Entities\TextElement.cs" />
     <Compile Include="Models\Entities\UserAccount.cs" />
+    <Compile Include="Models\inputs\LoginInput.cs" />
     <Compile Include="Models\Persistence\DataRepository.cs" />
     <Compile Include="Models\Persistence\NoteData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

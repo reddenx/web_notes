@@ -7,7 +7,15 @@ namespace WebNotesSite.Models.DataTypes
 {
     public class AccountCredentials
     {
-        public string PasswordHash { get; private set; }
-        public string AuthToken { get; private set; }
+        public readonly string AuthToken;
+        public readonly string PasswordHash;
+        public readonly string PasswordSalt;
+
+        public AccountCredentials(string authToken, string passwordHash, string passwordSalt)
+        {
+            AuthToken = authToken;
+            PasswordHash = passwordHash;
+            PasswordSalt = passwordSalt;
+        }
     }
 }

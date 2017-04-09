@@ -11,5 +11,16 @@ namespace WebNotesSite.Models.Entities
         public Guid Id { get; private set; }
         public AccountProfile Profile { get; private set; }
         public AccountCredentials Credentials { get; private set; }
+
+        public Guid GenerateNewAuthToken()
+        {
+            var newAuthToken = Guid.NewGuid();
+            Credentials = new AccountCredentials(
+                passwordHash: Credentials.PasswordHash,
+                authToken: newAuthToken.ToString(),
+                passwordSalt: Credentials.PasswordSalt);
+
+            return newAuthToken;
+        }
     }
 }

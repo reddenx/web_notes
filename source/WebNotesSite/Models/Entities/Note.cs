@@ -11,6 +11,8 @@ namespace WebNotesSite.Models.Entities
         public Guid Id { get; private set; }
         public UserAccount Owner { get; private set; }
 
+        public SharedNoteRelationship[] SharedNoteRelationships { get; private set; }
+
         public NoteName Name { get; private set; }
 
         public TextElement[] TextElements { get; private set; }

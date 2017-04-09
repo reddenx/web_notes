@@ -18,7 +18,10 @@ namespace WebNotesSite
         {
             // Code that runs on application startup
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configuration.Filters.Add(new ApiCookieAuthorizeAttribute());
+
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            GlobalFilters.Filters.Add(new CookieAuthorizationAttribute());
 
             var config = new SiteConfiguration();
             CachedDataAccess.Initialize(config.TypecacheStorageDirectory);

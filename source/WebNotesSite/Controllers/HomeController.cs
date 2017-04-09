@@ -14,11 +14,11 @@ namespace WebNotesSite.Controllers
     public class HomeController : Controller
     {
         public HomeController()
-        {
-        }
+        { }
 
         [HttpGet]
         [Route("")]
+        [AllowAnonymous]
         public ViewResult Index()
         {
             return View("Index");

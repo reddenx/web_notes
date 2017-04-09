@@ -31,5 +31,15 @@ namespace WebNotesSite.Models.Persistence
             var data = new NoteData() { Id = Guid.NewGuid(), Name = "test" };
             CachedDataAccess<NoteData>.Save(WebCache, data);
         }
+
+        public UserAccount GetUserByAuthToken(string authToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserAccount GetUserByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
