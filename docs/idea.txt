@@ -11,3 +11,26 @@
    + can draw with primitives and text.
  - able to be saved and managed from a user's interface
 
+ __________
+/ Features \______________________________
+
+ - Pages:
+   + Account
+     - change password
+	 - change username
+	 - change email
+   + Notes
+     - notes CRUD
+	 - manage shared note state
+	 - add/remove generic view link
+   + NoteTaking
+     - touch mode tools
+	   + stroke w/ brush (width, color)
+	   + 2 point primitives
+	 - mouse mode tools
+	   + 2 point primitives
+	   + text
+	     - size, always fixed width consolas
+	 - primitives
+	   + box w/ brush
+	   + line w/ brush
