@@ -16,7 +16,7 @@
                     <a href="/Note">Notes</a>
                 </div>
                 <div class="header-button">
-                    <a href="#">Login</a>
+                    <a href="#" v-on:click="LoginButtonClicked">Login</a>
                 </div>
                 <div class="header-button">
                     <a href="#">
@@ -33,32 +33,39 @@
 
         </div>
 
-        <div class="header-login-modal" v-show="showingLoginModal">
-            <div class="header-login-header">
-                <div class="header-login-header-left">
-                    <h3>Login</h3>
-                </div>
-                <div class="header-login-close-box"></div>
-            </div>
-            <div class="header-login-content">
-                <div class="form-input-container">
-                    <div class="form-input-label">
-                        Login Email
+        <div class="header-login-modal-backdrop" v-on:click.self="LoginBackdropClicked" v-show="showingLoginModal">
+            <div class="header-login-modal" v-show="showingLoginModal" >
+                <div class="header-login-header">
+                    <div class="header-login-header-left">
+                        Login
                     </div>
-                    <div class="form-input">
-                        <input type="text" v-model="loginEmail" />
+                    <div class="header-login-close-box" v-on:click="LoginModalCloseButtonClicked">
+                        &#x26DD;
                     </div>
                 </div>
-                <div class="form-input-container">
-                    <div class="form-input-label">
-                        Password
+                <div class="header-login-content">
+                    <div class="form-input-container">
+                        <div class="form-input-label">
+                            Login Email
+                        </div>
+                        <div class="form-input">
+                            <input type="text" v-model="loginEmail" />
+                        </div>
                     </div>
-                    <div class="form-input">
-                        <input type="password" v-model="loginPassword" />
+                    <div class="form-input-container">
+                        <div class="form-input-label">
+                            Password
+                        </div>
+                        <div class="form-input">
+                            <input type="password" v-model="loginPassword" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-input">
-                    <button type="button">Log In</button>
+                    <div class="form-input-container">
+
+                        <div class="form-input">
+                            <button type="button">Log In</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,5 +87,16 @@
                 showingLoginModal: false
             }
         },
+        methods: {
+            LoginButtonClicked: function () {
+                this.showingLoginModal = true;
+            },
+            LoginBackdropClicked: function () {
+                this.showingLoginModal = false;
+            },
+            LoginModalCloseButtonClicked: function () {
+                this.showingLoginModal = false;
+            }
+        }
     });
 </script>

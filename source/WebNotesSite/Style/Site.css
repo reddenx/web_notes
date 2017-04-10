@@ -46,7 +46,7 @@
         }
 
     .header-container .header-button {
-        text-align:center;
+        text-align: center;
         font-size: 24px;
         display: inline-block;
         font-weight: bold;
@@ -80,6 +80,64 @@
     .header-container::after {
         clear: both;
     }
+
+.header-login-modal-backdrop {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.68);
+}
+
+.header-login-modal {
+    margin: auto;
+    margin-top: 40px;
+    padding: 0;
+    width: 200px;
+    background-color: #c9e1ef;
+    border: 1px solid white;
+}
+
+    .header-login-modal .header-login-header {
+        background-color: #f7ae00;
+        margin: 0;
+        padding: 5px 10px;
+    }
+
+    .header-login-modal .header-login-header-left {
+        display: inline;
+    }
+
+    .header-login-modal .header-login-close-box {
+        float: right;
+    }
+
+    .header-login-modal .header-login-close-box {
+        cursor: pointer;
+    }
+
+    .header-login-modal .header-login-content {
+        padding: 10px;
+    }
+
+
+
+
+.form-input-container {
+}
+
+    .form-input-container .form-input-label {
+    }
+
+    .form-input-container .form-input {
+    }
+
+        .form-input-container .form-input input[type=button],
+        .form-input-container .form-input button {
+        }
+
+
 
 /*end footer, not on all pages*/
 .footer-container {
