@@ -12,7 +12,6 @@ namespace WebNotesSite.Framework
     {
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            //var user = AuthorizationHelper.AuthorizeUserFromContext(actionContext.Request);
             var cookies = actionContext.Request.Headers.GetCookies();
 
             if (AuthorizationHelper.AuthorizeUserWebapi(cookies))

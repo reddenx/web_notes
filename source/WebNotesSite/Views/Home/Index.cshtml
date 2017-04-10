@@ -15,25 +15,17 @@
             email: 'sean@altsrc.net',
             password: 'test',
             responseText: '',
+            accountApi: new AccountApi(),
         },
         methods: {
             AttemptLogin: function () {
                 var self = this;
-                $.ajax({
-                    url: '/json/account/login',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    xhrFields: {
-                        withCredentials: true,
-                    },
-                    data: JSON.stringify({
-                        Email: this.email,
-                        Password: this.password,
-                    })
-                }).done(function (data) {
-                    self.responseText = data;
-                }).fail(function (error) {
-                    self.responseText = 'error: ' + error;
+                this.accountApi.GenerateAuthToken(this.email, this.password).done(function (token) {
+                    if (token) {
+                        window.location = '/login/' + token;
+                    } else {
+                        self.responseText = 'unable to generate user token';
+                    }
                 })
             }
         }

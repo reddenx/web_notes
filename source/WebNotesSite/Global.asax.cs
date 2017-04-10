@@ -21,7 +21,7 @@ namespace WebNotesSite
             GlobalConfiguration.Configuration.Filters.Add(new ApiCookieAuthorizeAttribute());
 
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            GlobalFilters.Filters.Add(new CookieAuthorizationAttribute());
+            GlobalFilters.Filters.Add(new MvcCookieAuthorizeAttribute());
 
             var config = new SiteConfiguration();
             CachedDataAccess.Initialize(config.TypecacheStorageDirectory);

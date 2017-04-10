@@ -44,5 +44,19 @@ namespace WebNotesSite.Models.Entities
 
             return account;
         }
+
+        public AccountData ToData()
+        {
+            return new AccountData()
+            {
+                AuthToken = Credentials.AuthToken,
+                DisplayUsername = Profile.DisplayUsername,
+                Email = Profile.Email,
+                Id = Id,
+                NoteIds = Notes.Select(n => n.Id).ToArray(),
+                PasswordHash = Credentials.PasswordHash,
+                PasswordSalt = Credentials.PasswordSalt
+            };
+        }
     }
 }

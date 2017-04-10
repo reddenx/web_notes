@@ -108,6 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Account\AccountApi.js" />
+    <Content Include="Scripts\ApiPromiser.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -119,7 +121,8 @@
     <Compile Include="Data\CachedDataAccess.cs" />
     <Compile Include="Framework\ApiCookieAuthorizeAttribute.cs" />
     <Compile Include="Framework\AuthorizationHelper.cs" />
-    <Compile Include="Framework\CookieAuthorizationAttribute.cs" />
+    <Compile Include="Framework\MvcCookieAuthorizeAttribute.cs" />
+    <Compile Include="Framework\HtmlHelperExtensions.cs" />
     <Compile Include="Framework\SiteConfiguration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

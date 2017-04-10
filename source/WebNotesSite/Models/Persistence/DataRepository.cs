@@ -33,18 +33,6 @@ namespace WebNotesSite.Models.Persistence
             return null;
         }
 
-        public UserAccount GetAccountById(Guid accountId)
-        {
-            var account = GetData<AccountData>()?.FirstOrDefault(a => a.Id == accountId);
-            if (account != null)
-            {
-                var notes = account.NoteIds.Select(n => GetNoteById(n));
-
-                return UserAccount.FromData(account, notes.ToArray());
-            }
-            return null;
-        }
-
         public void SaveNote(Note note)
         {
             var data = note.ToData();
@@ -63,6 +51,26 @@ namespace WebNotesSite.Models.Persistence
             }
 
             return null;
+        }
+
+        public UserAccount GetAccountById(Guid accountId)
+        {
+            var account = GetData<AccountData>()?.FirstOrDefault(a => a.Id == accountId);
+            if (account != null)
+            {
+                var notes = account.NoteIds.Select(n => GetNoteById(n));
+
+                return UserAccount.FromData(account, notes.ToArray());
+            }
+            return null;
+        }
+
+        public void SaveAccount(UserAccount account)
+        {
+            var data = account.ToData();
+            var allData = GetData<AccountData>();
+            var newDataList = allData.Where(d => d.Id != data.Id).Concat(new[] { data }).ToArray();
+            CachedDataAccess.Save(WebCache, newDataList);
         }
 
         public UserAccount GetUserByEmail(string email)

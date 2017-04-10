@@ -33,11 +33,22 @@ namespace WebNotesSite.Framework
             {
                 if (user.Credentials.PasswordHash == HashPassword(password, user.Credentials.PasswordSalt))
                 {
-                    return user.GenerateNewAuthToken().ToString();
+                    var token = user.GenerateNewAuthToken().ToString();
+                    repository.SaveAccount(user);
+                    return token;
                 }
             }
 
             return null;
+        }
+
+        public static HttpCookie GetUnAuthCookie()
+        {
+            return new HttpCookie(AUTH_COOKIE_KEY, "")
+            {
+                Expires = DateTime.Now.AddMinutes(-1),
+                Shareable = false,
+            };
         }
 
         public static HttpCookie GetAuthCookieForToken(Cache cache, Guid authToken)

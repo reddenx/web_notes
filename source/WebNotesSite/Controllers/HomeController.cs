@@ -27,12 +27,25 @@ namespace WebNotesSite.Controllers
         [HttpGet]
         [Route("Login/{authToken:guid}")]
         [AllowAnonymous]
-        public RedirectResult LoggingIn(Guid authToken)
+        public RedirectResult SetupLoginToken(Guid authToken)
         {
             var cookie = AuthorizationHelper.GetAuthCookieForToken(HttpContext.Cache, authToken);
+            if (cookie != null)
+            {
+                Response.Cookies.Add(cookie);
+                return Redirect("/Account");
+            }
+
+            return Redirect("/");
+        }
+
+        [HttpGet]
+        [Route("Logout")]
+        public RedirectResult RemoveLoginToken()
+        {
+            var cookie = AuthorizationHelper.GetUnAuthCookie();
             Response.Cookies.Add(cookie);
-            
-            return Redirect("/Account");
+            return Redirect("/");
         }
 
         [HttpGet]

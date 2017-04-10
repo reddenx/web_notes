@@ -10,6 +10,8 @@
     <title>@ViewBag.Title</title>
     <script type="text/javascript" src="@config.JQueryCdnUrl"></script>
     <script type="text/javascript" src="@config.VueJsCdnUrl"></script>
+    @Html.IncludeJs("Scripts/ApiPromiser.js")
+    @Html.IncludeJs("Scripts/Account/AccountApi.js")
 </head>
 <body>
     @RenderBody()
