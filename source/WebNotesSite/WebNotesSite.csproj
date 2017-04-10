@@ -110,6 +110,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\Account\AccountApi.js" />
     <Content Include="Scripts\ApiPromiser.js" />
+    <Content Include="Style\Site.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +155,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Version.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Account.cshtml" />
+    <Content Include="Views\Home\TakeNotes.cshtml" />
+    <Content Include="Views\Home\ManageNotes.cshtml" />
+    <Content Include="Views\Shared\VueComponents\HeaderComponent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -161,7 +166,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Shared\Partials\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

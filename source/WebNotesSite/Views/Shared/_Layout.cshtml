@@ -10,10 +10,18 @@
     <title>@ViewBag.Title</title>
     <script type="text/javascript" src="@config.JQueryCdnUrl"></script>
     <script type="text/javascript" src="@config.VueJsCdnUrl"></script>
-    @Html.IncludeJs("Scripts/ApiPromiser.js")
-    @Html.IncludeJs("Scripts/Account/AccountApi.js")
+    <link rel="stylesheet" href="~/Style/Site.css" type="text/css" />
 </head>
 <body>
+    @Html.IncludeComponent("HeaderComponent")
+    <div id="header-context">
+        <header-component></header-component>
+    </div>
+
+    <script>
+        new Vue({el: '#header-context'});
+    </script>
+
     @RenderBody()
 </body>
 </html>

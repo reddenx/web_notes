@@ -1,0 +1,86 @@
+﻿body {
+    background-color: #c9e1ef;
+    margin-top: 30px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding: 0;
+    font-family: Consolas;
+    font-size: 16px;
+}
+
+/*sticky header*/
+.header-container {
+    height: 30px;
+    /*overflow: hidden;*/
+    position: absolute;
+    top: 0px;
+    background-color: #f7ae00;
+    width: 100%;
+    border-bottom: 2px solid white;
+}
+
+    .header-container .home-logo {
+        margin-left: 15px;
+        width: 30px;
+        height: 30px;
+        background-color: #ff00ff;
+    }
+
+    .header-container .header-left-section {
+        float: left;
+    }
+
+    .header-container .header-right-section {
+        float: right;
+    }
+
+    .header-container a {
+        font-style: normal;
+        color: black;
+        text-decoration: none;
+    }
+
+        .header-container a:hover {
+            text-decoration: underline;
+        }
+
+    .header-container .header-button {
+        text-align:center;
+        font-size: 24px;
+        display: inline-block;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+    }
+
+        .header-container .header-button:nth-child(n+2)::before {
+            content: '|';
+        }
+
+    .header-container .header-button-dropdown {
+        width: 100px;
+        position: absolute;
+        right: 0px;
+        top: 32px;
+        border-left: 2px solid white;
+        border-bottom: 2px solid white;
+        padding: 5px 10px;
+        margin: 0;
+        background-color: #f7ae00;
+    }
+
+        .header-container .header-button-dropdown ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-weight: bold;
+        }
+
+    .header-container::after {
+        clear: both;
+    }
+
+/*end footer, not on all pages*/
+.footer-container {
+}

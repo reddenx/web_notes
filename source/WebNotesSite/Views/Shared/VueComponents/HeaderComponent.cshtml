@@ -1,0 +1,84 @@
+﻿<div id="header-component-template" style="display:none;">
+    <div>
+        <div class="header-container">
+
+            <div class="header-left-section">
+                <a href="/">
+                    <div class="home-logo"></div>
+                </a>
+            </div>
+
+            <div class="header-right-section">
+                <div class="header-button">
+                    <a href="/Note/New">New Note</a>
+                </div>
+                <div class="header-button">
+                    <a href="/Note">Notes</a>
+                </div>
+                <div class="header-button">
+                    <a href="#">Login</a>
+                </div>
+                <div class="header-button">
+                    <a href="#">
+                        Account &#x25BC; &#x25B2;
+                    </a>
+                </div>
+                <div class="header-button-dropdown">
+                    <ul>
+                        <li><a href="/Account">Manage</a></li>
+                        <li><a href="/Logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="header-login-modal" v-show="showingLoginModal">
+            <div class="header-login-header">
+                <div class="header-login-header-left">
+                    <h3>Login</h3>
+                </div>
+                <div class="header-login-close-box"></div>
+            </div>
+            <div class="header-login-content">
+                <div class="form-input-container">
+                    <div class="form-input-label">
+                        Login Email
+                    </div>
+                    <div class="form-input">
+                        <input type="text" v-model="loginEmail" />
+                    </div>
+                </div>
+                <div class="form-input-container">
+                    <div class="form-input-label">
+                        Password
+                    </div>
+                    <div class="form-input">
+                        <input type="password" v-model="loginPassword" />
+                    </div>
+                </div>
+                <div class="form-input">
+                    <button type="button">Log In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.IncludeJs("/Scripts/ApiPromiser.js")
+@Html.IncludeJs("/Scripts/Account/AccountApi.js")
+<script>
+    Vue.component('header-component', {
+        template: document.getElementById('header-component-template').innerHTML,
+        props: {
+            authToken: String,
+        },
+        data: function () {
+            return {
+                loginEmail: '',
+                loginPassword: '',
+                showingLoginModal: false
+            }
+        },
+    });
+</script>
