@@ -25,6 +25,17 @@ namespace WebNotesSite.Controllers
         }
 
         [HttpGet]
+        [Route("Login/{authToken:guid}")]
+        [AllowAnonymous]
+        public RedirectResult LoggingIn(Guid authToken)
+        {
+            var cookie = AuthorizationHelper.GetAuthCookieForToken(HttpContext.Cache, authToken);
+            Response.Cookies.Add(cookie);
+            
+            return Redirect("/Account");
+        }
+
+        [HttpGet]
         [Route("Account")]
         public ViewResult Account()
         {
@@ -35,10 +46,6 @@ namespace WebNotesSite.Controllers
         [Route("Note")]
         public ViewResult ManageNotes()
         {
-            var noteId = Guid.NewGuid();
-            var dataRepo = new DataRepository(HttpContext.Cache);
-            dataRepo.GetById(noteId);
-
             return View("ManageNotes");
         }
 

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebNotesSite.Models.DataTypes;
+using WebNotesSite.Models.Persistence;
 
 namespace WebNotesSite.Models.Entities
 {
     public class Note
     {
         public Guid Id { get; private set; }
-        public UserAccount Owner { get; private set; }
 
-        public SharedNoteRelationship[] SharedNoteRelationships { get; private set; }
+        //public SharedNoteRelationship[] SharedNoteRelationships { get; private set; }
 
         public NoteName Name { get; private set; }
 
@@ -20,5 +20,43 @@ namespace WebNotesSite.Models.Entities
         public Stroke[] Strokes { get; private set; }
 
         public BrushColor BackgroundColor { get; private set; }
+
+        public static Note FromData(NoteData data, LineElementData[] lines, TextElementData[] texts, StrokeData[] strokes)
+        {
+            var note = new Note()
+            {
+                BackgroundColor = data.BackgroundColor,
+                Id = data.Id,
+                Name = new NoteName(
+                    name: data.Name,
+                    dateCreated: data.DateCreated,
+                    dateLastModified: data.DateLastModified,
+                    dateLastOpened: data.DateLastOpened,
+                    description: data.Description),
+            };
+
+            note.LineElements = lines.Select(l => LineElement.FromData(l, note)).ToArray();
+            note.TextElements = texts.Select(t => TextElement.FromData(t, note)).ToArray();
+            note.Strokes = strokes.Select(s => Stroke.FromData(s, note)).ToArray();
+
+            return note;
+        }
+
+        public NoteData ToData()
+        {
+            return new NoteData()
+            {
+                BackgroundColor = BackgroundColor,
+                DateCreated = Name.DateCreated,
+                Name = Name.Name,
+                DateLastModified = Name.DateLastModified,
+                DateLastOpened = Name.DateLastOpened,
+                Description = Name.Description,
+                Id = Id,
+                LineELementIds = LineElements.Select(l => l.Id).ToArray(),
+                StrokeIds = Strokes.Select(s => s.Id).ToArray(),
+                TextELementIds = TextElements.Select(t => t.Id).ToArray()
+            };
+        }
     }
 }

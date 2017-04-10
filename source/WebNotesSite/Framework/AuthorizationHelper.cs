@@ -18,21 +18,14 @@ namespace WebNotesSite.Framework
     {
         private const string AUTH_COOKIE_KEY = "notes_app_auth_token";
 
-        private static UserAccount AuthenticatedUser;
+        private static UserAccount AuthorizedUser;
 
-        public static UserAccount GetUser()
+        public static UserAccount GetAuthorizedUser()
         {
-            return AuthenticatedUser;
+            return AuthorizedUser;
         }
 
-        public static UserAccount AuthorizeUserFromApiContext(Collection<CookieHeaderValue> cookies)
-        {
-            var authValue = cookies.FirstOrDefault(cc => cc.Cookies.Any(c => c.Name == AUTH_COOKIE_KEY))?.Cookies.FirstOrDefault(c => c.Name == AUTH_COOKIE_KEY)?.Value;
-            var user = AuthorizeUser(HttpContext.Current.Cache, authValue);
-            return user;
-        }
-
-        public static bool TryAuthorizeApi(string email, string password, out CookieHeaderValue authCookie)
+        public static string GetAuthTokenForCredentials(string email, string password)
         {
             var repository = new DataRepository(HttpContext.Current.Cache);
             var user = repository.GetUserByEmail(email);
@@ -40,17 +33,39 @@ namespace WebNotesSite.Framework
             {
                 if (user.Credentials.PasswordHash == HashPassword(password, user.Credentials.PasswordSalt))
                 {
-                    var authToken = user.GenerateNewAuthToken();
-                    authCookie = new CookieHeaderValue(AUTH_COOKIE_KEY, authToken.ToString());
-                    return true;
+                    return user.GenerateNewAuthToken().ToString();
                 }
             }
 
-            authCookie = null;
-            return false;
+            return null;
         }
 
-        private static string HashPassword(string password, string salt)
+        public static HttpCookie GetAuthCookieForToken(Cache cache, Guid authToken)
+        {
+            if (AuthorizeUser(cache, authToken.ToString()))
+            {
+                return new HttpCookie(AUTH_COOKIE_KEY, authToken.ToString())
+                {
+                    Expires = DateTime.Now.AddMonths(1),
+                    Shareable = false,
+                };
+            }
+            return null;
+        }
+
+        public static bool AuthorizeUserMvc(Cache cache, HttpRequestBase request)
+        {
+            var authToken = HttpContext.Current.Request.Cookies[AUTH_COOKIE_KEY]?.Value;
+            return AuthorizeUser(cache, authToken);
+        }
+
+        public static bool AuthorizeUserWebapi(Collection<CookieHeaderValue> cookies)
+        {
+            var authValue = cookies.FirstOrDefault(cc => cc.Cookies.Any(c => c.Name == AUTH_COOKIE_KEY))?.Cookies.FirstOrDefault(c => c.Name == AUTH_COOKIE_KEY)?.Value;
+            return AuthorizeUser(HttpContext.Current.Cache, authValue);
+        }
+
+        public static string HashPassword(string password, string salt)
         {
             var hasher = new System.Security.Cryptography.SHA256Managed();
             var buffer = Encoding.ASCII.GetBytes(password + salt);
@@ -59,14 +74,8 @@ namespace WebNotesSite.Framework
             return string.Join("", hashBytes.Select(b => b.ToString("x2")));
         }
 
-        public static UserAccount AuthorizeUserFromContext(Cache cache, HttpRequestBase request)
-        {
-            var authToken = HttpContext.Current.Request.Cookies[AUTH_COOKIE_KEY]?.Value;
-            var user = AuthorizeUser(cache, authToken);
-            return user;
-        }
 
-        private static UserAccount AuthorizeUser(Cache cache, string authToken)
+        private static bool AuthorizeUser(Cache cache, string authToken)
         {
             var authGuid = Guid.Empty;
             if (Guid.TryParse(authToken, out authGuid))
@@ -75,11 +84,11 @@ namespace WebNotesSite.Framework
                 var user = repository.GetUserByAuthToken(authToken);
                 if (user != null)
                 {
-                    AuthenticatedUser = user;
-                    return user;
+                    AuthorizedUser = user;
+                    return true;
                 }
             }
-            return null;
+            return false;
         }
     }
 }

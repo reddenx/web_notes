@@ -16,27 +16,21 @@ namespace WebNotesSite.Data
         {
             StoragePath = storagePath;
         }
-    }
 
-    public static class CachedDataAccess<T> where T : class, new()
-    {
-        public static T Get(Cache webCache)
+        public static T Get<T>(Cache webCache) where T : class
         {
             string json = null;
             lock (CachedDataAccess.StoragePath)
             {
-                json = GetFromCache(webCache);
+                json = GetFromCache<T>(webCache);
                 if(json == null)
                 {
-                    json = GetFromFile();
+                    json = GetFromFile<T>();
                 }
 
                 if(json == null)
                 {
-                    var newData = new T();
-                    json = JsonConvert.SerializeObject(newData);
-                    SaveToFile(json);
-                    SaveToCache(webCache, json);
+                    return null;
                 }
             }
 
@@ -44,29 +38,25 @@ namespace WebNotesSite.Data
             return data;
         }
 
-        public static void Save(Cache webCache, T data)
+        public static void Save<T>(Cache webCache, T data) where T : class
         {
             var json = JsonConvert.SerializeObject(data);
             lock(CachedDataAccess.StoragePath)
             {
-                SaveToCache(webCache, json);
-                SaveToFile(json);
+                SaveToCache<T>(webCache, json);
+                SaveToFile<T>(json);
             }
         }
 
-
-
-
-
-        private static void SaveToFile(string json)
+        private static void SaveToFile<T>(string json) where T : class
         {
-            var fileName = GenerateFilename();
+            var fileName = GenerateFilename<T>();
             File.WriteAllText(fileName, json);
         }
 
-        private static string GetFromFile()
+        private static string GetFromFile<T>() where T : class
         {
-            var fileName = GenerateFilename();
+            var fileName = GenerateFilename<T>();
             if (File.Exists(fileName))
             {
                 var json = File.ReadAllText(fileName);
@@ -75,16 +65,16 @@ namespace WebNotesSite.Data
             return null;
         }
 
-        private static void SaveToCache(Cache webCache, string json)
+        private static void SaveToCache<T>(Cache webCache, string json) where T : class
         {
-            var key = GenerateKey();
+            var key = GenerateKey<T>();
             webCache.Remove(key);
             webCache.Add(key, json, null, Cache.NoAbsoluteExpiration, TimeSpan.FromHours(1), CacheItemPriority.High, null);
         }
 
-        private static string GetFromCache(Cache webCache)
+        private static string GetFromCache<T>(Cache webCache) where T : class
         {
-            var entry = webCache.Get(GenerateKey()) as string;
+            var entry = webCache.Get(GenerateKey<T>()) as string;
             return entry;
         }
 
@@ -92,12 +82,12 @@ namespace WebNotesSite.Data
 
 
 
-        private static string GenerateFilename()
+        private static string GenerateFilename<T>() where T : class
         {
-            return Path.Combine(CachedDataAccess.StoragePath, $"{GenerateKey()}.json");
+            return Path.Combine(CachedDataAccess.StoragePath, $"{GenerateKey<T>()}.json");
         }
 
-        private static string GenerateKey()
+        private static string GenerateKey<T>() where T : class
         {
             return $"TypeCache_{typeof(T).FullName}";
         }

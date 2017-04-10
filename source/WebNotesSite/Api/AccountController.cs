@@ -8,6 +8,7 @@ using System.Web.Http;
 using WebNotesSite.Framework;
 using WebNotesSite.Models.Dtos;
 using WebNotesSite.Models.inputs;
+using WebNotesSite.Models.Persistence;
 
 namespace WebNotesSite.Api
 {
@@ -19,30 +20,34 @@ namespace WebNotesSite.Api
         [Route("")]
         public AccountDto GetAccount()
         {
-            var user = AuthorizationHelper.GetUser();
             throw new NotImplementedException();
         }
 
         [HttpPost]
-        [Route("login")]
+        [Route("token")]
         [AllowAnonymous]
-        public HttpResponseMessage Login(LoginInput input)
+        public string GetAuthToken(LoginInput input)
         {
-            CookieHeaderValue authCookie = null;
-            if (AuthorizationHelper.TryAuthorizeApi(input.Email, input.Password, out authCookie))
+            var token = AuthorizationHelper.GetAuthTokenForCredentials(input.Email, input.Password);
+            return token;
+        }
+
+        [HttpPost]
+        [Route("")]
+        [AllowAnonymous]
+        public bool CreateUser(RegisterInput input)
+        {
+            var repo = new DataRepository(HttpContext.Current.Cache);
+            
+            //existing user check
+            var user = repo.GetUserByEmail(input.Email);
+            if (user == null)
             {
-                var response = new HttpResponseMessage();
-                response.Headers.AddCookies(new[] { authCookie });
-                response.Content = new StringContent("true");
-                return response;
-            }
-            else
-            {
-                var response = new HttpResponseMessage();
-                response.Content = new StringContent("false");
-                return response;
+                user = repo.CreateNewUser(input.Email, input.Password);
+                return user != null;
             }
 
+            return false;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace WebNotesSite.Framework
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            var user = AuthorizationHelper.AuthorizeUserFromContext(httpContext.Cache, httpContext.Request);
+            var user = AuthorizationHelper.AuthorizeUserMvc(httpContext.Cache, httpContext.Request);
 
             if (user != null)
             {

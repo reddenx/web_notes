@@ -1,11 +1,10 @@
 ﻿<div id="bound-context">
     Hello World!
 
-    <ul>
-        <li v-for="version in versions">
-            {{ version }}
-        </li>
-    </ul>
+    email: <input type="text" v-model="email"/><br />
+    password: <input type="text" v-model="password" /><br />
+    <button type="button" v-on:click="AttemptLogin()">login</button><br />
+    <span v-bind:text="responseText">STATUS MESSAGE</span>
 
 </div>
 
@@ -13,26 +12,30 @@
     new Vue({
         el: '#bound-context',
         data: {
-            versions: []
+            email: 'sean@altsrc.net',
+            password: 'test',
+            responseText: '',
         },
         methods: {
-            Initialize: function () {
+            AttemptLogin: function () {
                 var self = this;
                 $.ajax({
-                    url: '/json/version',
-                    type: 'GET',
-                    data: {}
-                }).done(function (response) {
-                    if (response) {
-                        self.versions = response;
-                    }
+                    url: '/json/account/login',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    xhrFields: {
+                        withCredentials: true,
+                    },
+                    data: JSON.stringify({
+                        Email: this.email,
+                        Password: this.password,
+                    })
+                }).done(function (data) {
+                    self.responseText = data;
+                }).fail(function (error) {
+                    self.responseText = 'error: ' + error;
                 })
-                .fail(function () {
-                    console.error('failed test call to api')
-                })
-                .always(function () {
-                });
             }
         }
-    }).Initialize();
+    })
 </script>

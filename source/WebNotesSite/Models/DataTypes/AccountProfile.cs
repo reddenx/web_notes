@@ -9,5 +9,11 @@ namespace WebNotesSite.Models.DataTypes
     {
         public string DisplayUsername { get; private set; }
         public string Email { get; private set; }
+
+        public AccountProfile(string displayUsername, string email)
+        {
+            DisplayUsername = displayUsername;
+            Email = email;
+        }
     }
 }

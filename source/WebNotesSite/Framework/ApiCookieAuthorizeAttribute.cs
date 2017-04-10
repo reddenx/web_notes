@@ -14,9 +14,8 @@ namespace WebNotesSite.Framework
         {
             //var user = AuthorizationHelper.AuthorizeUserFromContext(actionContext.Request);
             var cookies = actionContext.Request.Headers.GetCookies();
-            var user = AuthorizationHelper.AuthorizeUserFromApiContext(cookies);
 
-            if (user != null)
+            if (AuthorizationHelper.AuthorizeUserWebapi(cookies))
             {
                 return base.IsAuthorized(actionContext);
             }

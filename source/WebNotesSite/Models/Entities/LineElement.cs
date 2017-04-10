@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebNotesSite.Models.DataTypes;
+using WebNotesSite.Models.Persistence;
 
 namespace WebNotesSite.Models.Entities
 {
@@ -16,5 +17,18 @@ namespace WebNotesSite.Models.Entities
 
         public BrushColor Color { get; private set; }
         public BrushSize Size { get; private set; }
+
+        public static LineElement FromData(LineElementData data, Note note)
+        {
+            return new LineElement()
+            {
+                Color = data.Color,
+                EndPosition = data.End,
+                Id = data.Id,
+                Owner = note,
+                Size = data.Size,
+                StartPosition = data.Start,
+            };
+        }
     }
 }

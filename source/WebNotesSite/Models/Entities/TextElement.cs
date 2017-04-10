@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebNotesSite.Models.DataTypes;
+using WebNotesSite.Models.Persistence;
 
 namespace WebNotesSite.Models.Entities
 {
@@ -14,5 +15,17 @@ namespace WebNotesSite.Models.Entities
         public Vector2 Position { get; private set; }
         public int FontSize { get; private set; }
         public BrushColor Color { get; private set; }
+
+        public static TextElement FromData(TextElementData data, Note note)
+        {
+            return new TextElement()
+            {
+                Color = data.Color,
+                FontSize = data.FontSize,
+                Id = data.Id,
+                Owner = note,
+                Position = data.Position
+            };
+        }
     }
 }

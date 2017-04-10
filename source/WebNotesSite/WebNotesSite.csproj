@@ -138,6 +138,8 @@
     <Compile Include="Models\Entities\TextElement.cs" />
     <Compile Include="Models\Entities\UserAccount.cs" />
     <Compile Include="Models\inputs\LoginInput.cs" />
+    <Compile Include="Models\inputs\RegisterInput.cs" />
+    <Compile Include="Models\Persistence\AccountData.cs" />
     <Compile Include="Models\Persistence\DataRepository.cs" />
     <Compile Include="Models\Persistence\NoteData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,6 +149,7 @@
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Version.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
