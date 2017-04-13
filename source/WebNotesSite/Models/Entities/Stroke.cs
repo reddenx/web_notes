@@ -16,6 +16,17 @@ namespace WebNotesSite.Models.Entities
         public BrushSize Size { get; private set; }
         public Vector2[] Path { get; private set; }
 
+        public StrokeData ToData()
+        {
+            return new StrokeData()
+            {
+                Color = Color,
+                Id = Id,
+                Path = Path,
+                Size = Size,
+            };
+        }
+
         public static Stroke FromData(StrokeData data, Note note)
         {
             return new Stroke()

@@ -13,7 +13,6 @@ using WebNotesSite.Models.Persistence;
 namespace WebNotesSite.Api
 {
     [RoutePrefix("json/account")]
-    [Authorize]
     public class AccountController : ApiController
     {
         [HttpGet]

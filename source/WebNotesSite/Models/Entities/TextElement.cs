@@ -27,5 +27,16 @@ namespace WebNotesSite.Models.Entities
                 Position = data.Position
             };
         }
+
+        public TextElementData ToData()
+        {
+            return new TextElementData()
+            {
+                Color = Color,
+                FontSize = FontSize,
+                Id = Id,
+                Position = Position
+            };
+        }
     }
 }

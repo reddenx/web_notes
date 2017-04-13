@@ -116,12 +116,14 @@
   <ItemGroup>
     <Compile Include="Api\AccountController.cs" />
     <Compile Include="Api\HomeApiController.cs" />
+    <Compile Include="Api\NoteController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\CachedDataAccess.cs" />
     <Compile Include="Framework\ApiCookieAuthorizeAttribute.cs" />
     <Compile Include="Framework\AuthorizationHelper.cs" />
+    <Compile Include="Framework\EventExtensions.cs" />
     <Compile Include="Framework\MvcCookieAuthorizeAttribute.cs" />
     <Compile Include="Framework\HtmlHelperExtensions.cs" />
     <Compile Include="Framework\SiteConfiguration.cs" />
@@ -136,12 +138,20 @@
     <Compile Include="Models\DataTypes\SharedNoteRelationship.cs" />
     <Compile Include="Models\DataTypes\Vector2.cs" />
     <Compile Include="Models\Dtos\AccountDto.cs" />
+    <Compile Include="Models\Dtos\LineElementDto.cs" />
+    <Compile Include="Models\Dtos\NoteDto.cs" />
+    <Compile Include="Models\Dtos\StrokeDto.cs" />
+    <Compile Include="Models\Dtos\TextElementDto.cs" />
     <Compile Include="Models\Entities\LineElement.cs" />
     <Compile Include="Models\Entities\Note.cs" />
     <Compile Include="Models\Entities\Stroke.cs" />
     <Compile Include="Models\Entities\TextElement.cs" />
     <Compile Include="Models\Entities\UserAccount.cs" />
     <Compile Include="Models\inputs\LoginInput.cs" />
+    <Compile Include="Models\inputs\NewLineElementInput.cs" />
+    <Compile Include="Models\inputs\NewNoteInput.cs" />
+    <Compile Include="Models\inputs\NewStrokeInput.cs" />
+    <Compile Include="Models\inputs\NewTextElementInput.cs" />
     <Compile Include="Models\inputs\RegisterInput.cs" />
     <Compile Include="Models\Persistence\AccountData.cs" />
     <Compile Include="Models\Persistence\DataRepository.cs" />

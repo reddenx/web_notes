@@ -9,6 +9,8 @@ namespace WebNotesSite.Models.Entities
 {
     public class Note
     {
+        public event EventHandler OnChanged;
+
         public Guid Id { get; private set; }
 
         //public SharedNoteRelationship[] SharedNoteRelationships { get; private set; }
@@ -17,9 +19,11 @@ namespace WebNotesSite.Models.Entities
 
         public TextElement[] TextElements { get; private set; }
         public LineElement[] LineElements { get; private set; }
+
         public Stroke[] Strokes { get; private set; }
 
         public BrushColor BackgroundColor { get; private set; }
+
 
         public static Note FromData(NoteData data, LineElementData[] lines, TextElementData[] texts, StrokeData[] strokes)
         {
@@ -58,5 +62,27 @@ namespace WebNotesSite.Models.Entities
                 TextELementIds = TextElements.Select(t => t.Id).ToArray()
             };
         }
+
+
+
+
+        public void Rename(string newName) { }
+
+        public TextElement AddText(string text, int size, BrushColor color) { throw new NotImplementedException(); }
+        public void RemoveText(Guid textId) { }
+
+        public LineElement AddLine(Vector2 start, Vector2 end, BrushSize size, BrushColor color) { throw new NotImplementedException(); }
+
+        public void SetBackgroundColor(BrushColor newColor)
+        {
+            if (BackgroundColor != newColor)
+            {
+                BackgroundColor = newColor;
+                OnChanged.SafeInvoke(this);
+            }
+        }
+
+        public Stroke AddStroke(BrushColor color, BrushSize size, Vector2[] path) { throw new NotImplementedException(); }
+        public void RemoveStroke(Guid strokeId) { }
     }
 }

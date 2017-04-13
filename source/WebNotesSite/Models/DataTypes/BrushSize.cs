@@ -8,5 +8,10 @@ namespace WebNotesSite.Models.DataTypes
     public class BrushSize
     {
         public float Radius { get; private set; }
+
+        public BrushSize(float radius)
+        {
+            Radius = radius;
+        }
     }
 }

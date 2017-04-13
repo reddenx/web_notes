@@ -14,19 +14,10 @@ namespace WebNotesSite.Models.Entities
         public AccountCredentials Credentials { get; private set; }
 
         public Note[] Notes { get; private set; }
+        //not a fully baked idea yet
         //public SharedNoteRelationship[] SharedNoteRelationships { get; private set; }
 
-        public Guid GenerateNewAuthToken()
-        {
-            var newAuthToken = Guid.NewGuid();
-            Credentials = new AccountCredentials(
-                passwordHash: Credentials.PasswordHash,
-                authToken: newAuthToken.ToString(),
-                passwordSalt: Credentials.PasswordSalt);
-
-            return newAuthToken;
-        }
-
+            
         public static UserAccount FromData(AccountData data, Note[] notes)
         {
             var account = new UserAccount()
@@ -58,5 +49,25 @@ namespace WebNotesSite.Models.Entities
                 PasswordSalt = Credentials.PasswordSalt
             };
         }
+
+        public Note AddNote(string name) { throw new NotImplementedException(); }
+
+        public void DeleteNote(Guid noteId) { throw new NotImplementedException(); }
+
+        public void ChangePassword(string newPassword) { throw new NotImplementedException(); }
+
+        public void UpdateProfile(AccountProfile newProfile) { throw new NotImplementedException(); }
+
+        public Guid GenerateNewAuthToken()
+        {
+            var newAuthToken = Guid.NewGuid();
+            Credentials = new AccountCredentials(
+                passwordHash: Credentials.PasswordHash,
+                authToken: newAuthToken.ToString(),
+                passwordSalt: Credentials.PasswordSalt);
+
+            return newAuthToken;
+        }
+
     }
 }

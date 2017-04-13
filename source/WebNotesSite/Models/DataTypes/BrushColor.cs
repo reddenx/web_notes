@@ -7,9 +7,17 @@ namespace WebNotesSite.Models.DataTypes
 {
     public class BrushColor
     {
-        public float R { get; private set; }
-        public float G { get; private set; }
-        public float B { get; private set; }
-        public float A { get; private set; }
+        public float Red { get; private set; }
+        public float Green { get; private set; }
+        public float Blue { get; private set; }
+        public float Alpha { get; private set; }
+
+        public BrushColor(float r, float g, float b, float a)
+        {
+            Red = r;
+            Green = g;
+            Blue = b;
+            Alpha = a;
+        }
     }
 }
