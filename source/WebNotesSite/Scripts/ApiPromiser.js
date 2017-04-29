@@ -22,14 +22,18 @@
             } else {
                 m.promise.done(callback);
             }
+
+            return m.promise;
         }
 
         self.fail = function (callback) {
             m.promise.fail(callback);
+            return m.promise;
         }
 
         self.always = function (callback) {
             m.promise.always(callback);
+            return m.promise;
         }
 
         m.promise.done(function (data) {

@@ -14,14 +14,7 @@ namespace WebNotesSite.Framework
         {
             var cookies = actionContext.Request.Headers.GetCookies();
 
-            if (AuthorizationHelper.AuthorizeUserWebapi(cookies))
-            {
-                return base.IsAuthorized(actionContext);
-            }
-            else
-            {
-                return false;
-            }
+            return AuthorizationHelper.AuthorizeUserWebapi(cookies);
         }
     }
 }

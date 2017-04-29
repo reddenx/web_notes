@@ -1,14 +1,53 @@
 ﻿<div id="bound-context">
     <h2>Notes page</h2>
 
+    <ul>
+        <li v-for="note in notes">{{note.name}}</li>
+    </ul>
+
+    <input type="text" v-model="newName" />
+    <button type="button" v-on:click="CreateNote()">Create</button>
+
 </div>
 
+@Html.IncludeJs("Scripts/Note/NoteApi.js")
+
 <script>
-    new Vue({
-        el: '#bound-context',
-        data: {
-        },
-        methods: {
-        }
-    });
+    (function () {
+        var noteApi = new NoteApi();
+
+        new Vue({
+            el: '#bound-context',
+            data: {
+                notes: [],
+                isBusy: false,
+                newName: '',
+            },
+            mounted: function () {
+                this.GetNotes();
+            },
+            methods: {
+                GetNotes: function () {
+                    this.isBusy = true;
+
+                    var self = this;
+                    noteApi.GetAllNotes().done(function (notes) {
+                        self.notes = notes;
+                    }).always(function () {
+                        self.isBusy = false;
+                    });
+                },
+                CreateNote: function () {
+                    this.isBusy = true;
+
+                    var self = this;
+                    noteApi.Create(this.newName).done(function (note) {
+                        self.notes.push(note);
+                    }).always(function () {
+                        self.isBusy = false;
+                    });
+                }
+            }
+        });
+    })();
 </script>

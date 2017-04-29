@@ -28,9 +28,19 @@ namespace WebNotesSite.Models.Persistence
                 var strokes = GetData<StrokeData>().Where(s => myNoteData.StrokeIds.Contains(s.Id));
 
                 var note = Note.FromData(myNoteData, lines.ToArray(), texts.ToArray(), strokes.ToArray());
+                note.OnChanged += HandleNoteChanged;
                 return note;
             }
             return null;
+        }
+
+        private void HandleNoteChanged(object sender, EventArgs e)
+        {
+            if (sender as Note != null)
+            {
+                var note = sender as Note;
+                SaveNote(note);
+            }
         }
 
         public void SaveNote(Note note)

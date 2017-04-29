@@ -110,6 +110,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\Account\AccountApi.js" />
     <Content Include="Scripts\ApiPromiser.js" />
+    <Content Include="Scripts\Note\NoteApi.js" />
     <Content Include="Style\Site.css" />
     <Content Include="Web.config" />
   </ItemGroup>

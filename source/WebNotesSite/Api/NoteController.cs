@@ -55,6 +55,12 @@ namespace WebNotesSite.Api
             var user = AuthorizationHelper.GetAuthorizedUser();
             var newNote = user.AddNote(noteInput.Name);
             var noteDto = new NoteDto(newNote.ToData());
+
+#warning this is bad practice, make a better save eventing system
+            var repo = new DataRepository(HttpContext.Current.Cache);
+            repo.SaveAccount(user);
+            repo.SaveNote(newNote);
+
             return noteDto;
         }
 
