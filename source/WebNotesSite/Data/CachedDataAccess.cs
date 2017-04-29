@@ -8,6 +8,9 @@ using System.Web.Caching;
 
 namespace WebNotesSite.Data
 {
+    /// <summary>
+    /// uh, this complicated mess synchronizes webcache and file data
+    /// </summary>
     public static class CachedDataAccess
     {
         public static string StoragePath;

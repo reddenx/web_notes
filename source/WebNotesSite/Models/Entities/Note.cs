@@ -22,6 +22,17 @@ namespace WebNotesSite.Models.Entities
 
         public BrushColor BackgroundColor { get; private set; }
 
+        public Note(string name)
+        {
+            Id = Guid.NewGuid();
+            Name = new NoteName(name, string.Empty, DateTime.Now, DateTime.Now, DateTime.Now);
+            TextElements = new TextElement[] { };
+            LineElements = new LineElement[] { };
+            Strokes = new Stroke[] { };
+            BackgroundColor = new BrushColor(1, 1, 1, 1);
+        }
+
+        private Note() { }
 
         public static Note FromData(NoteData data, LineElementData[] lines, TextElementData[] texts, StrokeData[] strokes)
         {

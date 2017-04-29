@@ -13,6 +13,16 @@ namespace WebNotesSite.Framework
 {
     /// <summary>
     /// to be used exclusively at the controller level.
+    /// 
+    /// Authorization:
+    /// 1 user logs in and gets a token using GetAuthCookieForToken
+    /// 2 every request afterwards the user presents this token in the form of a cookie and the attributes take care of the work.
+    /// 
+    /// Attributes:
+    /// ApiCookieAuthorizeAttribute - ensures api calls have a valid user context
+    /// MvcCookieAuthorizeAttribute - ensures view calls have valid user context
+    /// 
+    /// 
     /// </summary>
     public static class AuthorizationHelper
     {
@@ -84,7 +94,6 @@ namespace WebNotesSite.Framework
 
             return string.Join("", hashBytes.Select(b => b.ToString("x2")));
         }
-
 
         private static bool AuthorizeUser(Cache cache, string authToken)
         {

@@ -180,7 +180,7 @@ namespace WebNotesSite.Api
 
 
 
-#error complete the constructors of the DTOs
+#warning complete the constructors of the DTOs
 
         [HttpGet]
         [Route("note/{noteId:guid}/lineelements")]

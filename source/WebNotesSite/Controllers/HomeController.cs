@@ -24,10 +24,11 @@ namespace WebNotesSite.Controllers
             return View("Index");
         }
 
+        //right now this does a roundabout thing and gets the token via an api call, then uses this to plop it into the cookies for the browser
         [HttpGet]
         [Route("Login/{authToken:guid}")]
         [AllowAnonymous]
-        public RedirectResult SetupLoginToken(Guid authToken)
+        public RedirectResult HACK_SetupLoginToken(Guid authToken)
         {
             var cookie = AuthorizationHelper.GetAuthCookieForToken(HttpContext.Cache, authToken);
             if (cookie != null)

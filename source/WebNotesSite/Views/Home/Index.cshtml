@@ -1,7 +1,7 @@
 ﻿<div id="bound-context">
     Hello World!
 
-    email: <input type="text" v-model="email"/><br />
+    email: <input type="text" v-model="email" /><br />
     password: <input type="text" v-model="password" /><br />
     <button type="button" v-on:click="AttemptLogin()">login</button><br />
     <span v-bind:text="responseText">STATUS MESSAGE</span>
@@ -29,7 +29,7 @@
                     } else {
                         self.responseText = 'unable to generate user token';
                     }
-                })
+                });
             }
         }
     })

@@ -9,11 +9,15 @@ namespace WebNotesSite.Models.Dtos
 {
     public class NoteDto
     {
-        private NoteData noteData;
-
+        public Guid Id;
+        public string Name;
+        public string Description;
+        
         public NoteDto(NoteData noteData)
         {
-            this.noteData = noteData;
+            Id = noteData.Id;
+            Name = noteData.Name;
+            Description = noteData.Description;
         }
     }
 }

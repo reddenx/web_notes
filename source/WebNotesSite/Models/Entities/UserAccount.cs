@@ -14,9 +14,6 @@ namespace WebNotesSite.Models.Entities
         public AccountCredentials Credentials { get; private set; }
 
         public Note[] Notes { get; private set; }
-        //not a fully baked idea yet
-        //public SharedNoteRelationship[] SharedNoteRelationships { get; private set; }
-
             
         public static UserAccount FromData(AccountData data, Note[] notes)
         {
@@ -50,7 +47,15 @@ namespace WebNotesSite.Models.Entities
             };
         }
 
-        public Note AddNote(string name) { throw new NotImplementedException(); }
+        public Note AddNote(string name)
+        {
+            var newNote = new Note(name);
+
+            //bullshit add to it
+            Notes = Notes.Concat(new Note[] { newNote }).ToArray();
+
+            return newNote;
+        }
 
         public void DeleteNote(Guid noteId) { throw new NotImplementedException(); }
 

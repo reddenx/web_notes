@@ -19,7 +19,8 @@ namespace WebNotesSite.Api
         [Route("")]
         public AccountDto GetAccount()
         {
-            throw new NotImplementedException();
+            var user = AuthorizationHelper.GetAuthorizedUser();
+            return new AccountDto(user.ToData());
         }
 
         [HttpPost]
