@@ -91,7 +91,7 @@ namespace WebNotesSite.Api
             var user = AuthorizationHelper.GetAuthorizedUser();
             var note = user.Notes.FirstOrDefault(n => n.Id == noteId);
 
-            if(strokeInput.Path == null)
+            if (strokeInput.Path == null)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
@@ -130,7 +130,7 @@ namespace WebNotesSite.Api
             var user = AuthorizationHelper.GetAuthorizedUser();
             var note = user?.Notes.FirstOrDefault(n => n.Id == noteId);
 
-            if(note == null)
+            if (note == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
@@ -152,7 +152,7 @@ namespace WebNotesSite.Api
             }
 
             var element = note.AddText(input.Text,
-                input.FontSize, 
+                input.FontSize,
                 new BrushColor(input.R,
                     input.B,
                     input.G,
@@ -180,19 +180,58 @@ namespace WebNotesSite.Api
 
 
 
-#error you left off here, finish the lines, then move on to the constructors of the DTOs
+#error complete the constructors of the DTOs
 
-        //[HttpGet]
-        //[Route("note/{noteId:guid}/lineelements")]
-        //public LineElementDto[] GetAllLines(Guid noteId) { }
+        [HttpGet]
+        [Route("note/{noteId:guid}/lineelements")]
+        public LineElementDto[] GetAllLines(Guid noteId)
+        {
+            var user = AuthorizationHelper.GetAuthorizedUser();
+            var note = user?.Notes.FirstOrDefault(n => n.Id == noteId);
+            var lines = note?.LineElements;
 
-        //[HttpPost]
-        //[Route("note/{noteId:guid}/lineelements")]
-        //public LineElementDto AddLine(Guid noteId, [FromBody]NewLineElementInput input) { }
+            if (note == null || lines == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
 
-        //[HttpDelete]
-        //[Route("note/{noteId:guid}/lineelements/{lineElementId:guid}")]
-        //public void DeleteLine(Guid noteId, Guid lineElementId) { }
+            return lines.Select(l => new LineElementDto(l.ToData())).ToArray();
+        }
+
+        [HttpPost]
+        [Route("note/{noteId:guid}/lineelements")]
+        public LineElementDto AddLine(Guid noteId, [FromBody]NewLineElementInput input)
+        {
+            var user = AuthorizationHelper.GetAuthorizedUser();
+            var note = user?.Notes.FirstOrDefault(n => n.Id == noteId);
+
+            if (note == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            var color = new BrushColor(input.R, input.B, input.G, input.A) { };
+            var size = new BrushSize(input.Radius) { };
+
+            var line = note.AddLine(input.Start, input.End, size, color);
+
+            return new LineElementDto(line.ToData());
+        }
+
+        [HttpDelete]
+        [Route("note/{noteId:guid}/lineelements/{lineElementId:guid}")]
+        public void DeleteLine(Guid noteId, Guid lineElementId)
+        {
+            var user = AuthorizationHelper.GetAuthorizedUser();
+            var note = user?.Notes.FirstOrDefault(n => n.Id == noteId);
+
+            if (note == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            note.RemoveLine(lineElementId);
+        }
 
 
 

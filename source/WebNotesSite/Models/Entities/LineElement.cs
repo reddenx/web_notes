@@ -30,5 +30,10 @@ namespace WebNotesSite.Models.Entities
                 StartPosition = data.Start,
             };
         }
+
+        public LineElementData ToData()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
