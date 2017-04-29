@@ -8,11 +8,10 @@ namespace WebNotesSite.Models.Dtos
 {
     public class TextElementDto
     {
-        private TextElementData textElementData;
+#warning incomplete dto object
 
         public TextElementDto(TextElementData textElementData)
         {
-            this.textElementData = textElementData;
         }
     }
 }

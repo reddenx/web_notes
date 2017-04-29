@@ -156,7 +156,8 @@ namespace WebNotesSite.Api
                 new BrushColor(input.R,
                     input.B,
                     input.G,
-                    input.A));
+                    input.A),
+                input.Position);
 
             var dto = new TextElementDto(element.ToData());
             return dto;
@@ -180,7 +181,6 @@ namespace WebNotesSite.Api
 
 
 
-#warning complete the constructors of the DTOs
 
         [HttpGet]
         [Route("note/{noteId:guid}/lineelements")]
@@ -240,30 +240,7 @@ namespace WebNotesSite.Api
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#warning incomplete websocket system
         //[HttpGet]
         //[Route("note/connect")]
         //public HttpResponseMessage OpenSocketConnection()

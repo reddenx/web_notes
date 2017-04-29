@@ -51,7 +51,7 @@ namespace WebNotesSite.Models.Entities
         {
             var newNote = new Note(name);
 
-            //bullshit add to it
+#warning switch to eventing list blah blah
             Notes = Notes.Concat(new Note[] { newNote }).ToArray();
 
             return newNote;

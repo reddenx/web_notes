@@ -68,11 +68,18 @@ namespace WebNotesSite.Models.Entities
                 Id = Id,
                 LineELementIds = LineElements.Select(l => l.Id).ToArray(),
                 StrokeIds = Strokes.Select(s => s.Id).ToArray(),
-                TextELementIds = TextElements.Select(t => t.Id).ToArray()
+                TextELementIds = TextElements.Select(t => t.Id).ToArray(),
             };
         }
 
-        public void Rename(string newName) { }
+        public void Rename(string newName)
+        {
+            if (Name.Name != newName && !string.IsNullOrWhiteSpace(newName))
+            {
+                Name = new NoteName(newName, Name.Description, Name.DateCreated, DateTime.Now, Name.DateLastOpened);
+                OnChanged.SafeInvoke(this);
+            }
+        }
 
         public void SetBackgroundColor(BrushColor newColor)
         {
@@ -83,13 +90,64 @@ namespace WebNotesSite.Models.Entities
             }
         }
 
-        public TextElement AddText(string text, int size, BrushColor color) { throw new NotImplementedException(); }
-        public void RemoveText(Guid textId) { }
+        public TextElement AddText(string text, int size, BrushColor color, Vector2 position)
+        {
+            if (!string.IsNullOrWhiteSpace(text) && size > 0 && color != null)
+            {
+                var element = new TextElement(this, position, size, color);
+#warning change concat addition to lists eventually
+                TextElements = TextElements.Concat(new TextElement[] { element }).ToArray();
+                OnChanged.SafeInvoke(this);
+                return element;
+            }
+            else
+            {
+                throw new ArgumentException("AddText input arguments not valid");
+            }
+        }
 
-        public LineElement AddLine(Vector2 start, Vector2 end, BrushSize size, BrushColor color) { throw new NotImplementedException(); }
-        internal void RemoveLine(Guid lineElementId) { throw new NotImplementedException(); }
+        public void RemoveText(Guid textId)
+        {
+            throw new NotImplementedException();
+        }
 
-        public Stroke AddStroke(BrushColor color, BrushSize size, Vector2[] path) { throw new NotImplementedException(); }
-        public void RemoveStroke(Guid strokeId) { }
+        public LineElement AddLine(Vector2 start, Vector2 end, BrushSize size, BrushColor color)
+        {
+            if (start != null && end != null && size != null && color != null)
+            {
+                var line = new LineElement(this, start, end, color, size);
+#warning change concat addition to lists eventually
+                LineElements = LineElements.Concat(new LineElement[] { line }).ToArray();
+                OnChanged.SafeInvoke(this);
+                return line;
+            }
+            else
+            {
+                throw new ArgumentException("AddLine input arguments not valid");
+            }
+        }
+
+        public void RemoveLine(Guid lineElementId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Stroke AddStroke(BrushColor color, BrushSize size, Vector2[] path)
+        {
+            if (color != null && size != null && path != null && path.Length > 1)
+            {
+                var stroke = new Stroke(this, color, size, path);
+#warning change concat addition to lists eventually
+                Strokes = Strokes.Concat(new Stroke[] { stroke }).ToArray();
+                OnChanged.SafeInvoke(this);
+                return stroke;
+            }
+            else
+            {
+                throw new ArgumentException("AddStroke input arguments are not valid");
+            }
+        }
+
+        public void RemoveStroke(Guid strokeId) { throw new NotImplementedException(); }
     }
 }

@@ -18,6 +18,20 @@ namespace WebNotesSite.Models.Entities
         public BrushColor Color { get; private set; }
         public BrushSize Size { get; private set; }
 
+        public LineElement(Note owner, Vector2 start, Vector2 end, BrushColor color, BrushSize size)
+        {
+            Id = Guid.NewGuid();
+            Owner = owner;
+
+            StartPosition = start;
+            EndPosition = end;
+
+            Color = color;
+            Size = size;
+        }
+
+        private LineElement() { }
+
         public static LineElement FromData(LineElementData data, Note note)
         {
             return new LineElement()
@@ -33,7 +47,14 @@ namespace WebNotesSite.Models.Entities
 
         public LineElementData ToData()
         {
-            throw new NotImplementedException();
+            return new LineElementData()
+            {
+                Color = Color,
+                End = EndPosition,
+                Id = Id,
+                Size = Size,
+                Start = StartPosition
+            };
         }
     }
 }

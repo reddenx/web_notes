@@ -16,6 +16,18 @@ namespace WebNotesSite.Models.Entities
         public BrushSize Size { get; private set; }
         public Vector2[] Path { get; private set; }
 
+        public Stroke(Note owner, BrushColor color, BrushSize size, Vector2[] path)
+        {
+            Id = Guid.NewGuid();
+            Owner = owner;
+
+            Color = color;
+            Size = size;
+            Path = path;
+        }
+
+        private Stroke() { }
+
         public StrokeData ToData()
         {
             return new StrokeData()

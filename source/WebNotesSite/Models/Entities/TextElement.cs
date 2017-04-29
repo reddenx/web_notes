@@ -16,6 +16,18 @@ namespace WebNotesSite.Models.Entities
         public int FontSize { get; private set; }
         public BrushColor Color { get; private set; }
 
+        public TextElement(Note owner, Vector2 position, int fontSize, BrushColor color)
+        {
+            Id = Guid.NewGuid();
+            Owner = owner;
+
+            Position = position;
+            FontSize = fontSize;
+            Color = color;
+        }
+
+        private TextElement() { }
+
         public static TextElement FromData(TextElementData data, Note note)
         {
             return new TextElement()

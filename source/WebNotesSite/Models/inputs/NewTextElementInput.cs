@@ -12,7 +12,8 @@ namespace WebNotesSite.Models.inputs
         public float G;
         public float B;
         public float A;
-        public int FontSize { get; internal set; }
-        public string Text { get; internal set; }
+        public int FontSize;
+        public string Text;
+        public Vector2 Position;
     }
 }

@@ -10,11 +10,11 @@ namespace WebNotesSite.Models.Dtos
     {
         public string Username;
         public string Email;
-        private AccountData accountData;
 
         public AccountDto(AccountData accountData)
         {
-            this.accountData = accountData;
+            Username = accountData.DisplayUsername;
+            Email = accountData.Email;
         }
     }
 }

@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebNotesSite.Models.DataTypes;
 using WebNotesSite.Models.Persistence;
 
 namespace WebNotesSite.Models.Dtos
 {
     public class StrokeDto
     {
-        private StrokeData strokeData;
+        public Guid Id;
+        public Vector2[] Path;
+        public BrushColor Brush;
+        public BrushSize Size;
 
         public StrokeDto(StrokeData strokeData)
         {
-            this.strokeData = strokeData;
+            Id = strokeData.Id;
+            Path = strokeData.Path;
+            Brush = strokeData.Color;
+            Size = strokeData.Size;
         }
     }
 }
