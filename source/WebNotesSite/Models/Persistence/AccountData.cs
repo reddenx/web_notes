@@ -7,7 +7,7 @@ namespace WebNotesSite.Models.Persistence
 {
     public class AccountData
     {
-        public Guid Id;
+        public Guid Id { get; set; }
 
         public string DisplayUsername;
         public string Email;
@@ -17,6 +17,5 @@ namespace WebNotesSite.Models.Persistence
         public string PasswordSalt;
 
         public Guid[] NoteIds;
-        //public SharedNoteData[] SharedNoteData;
     }
 }

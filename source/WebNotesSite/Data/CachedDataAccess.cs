@@ -81,10 +81,6 @@ namespace WebNotesSite.Data
             return entry;
         }
 
-
-
-
-
         private static string GenerateFilename<T>() where T : class
         {
             return Path.Combine(CachedDataAccess.StoragePath, $"{GenerateKey<T>()}.json");

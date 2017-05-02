@@ -7,6 +7,14 @@
     <span v-bind:text="responseText">STATUS MESSAGE</span>
 </div>
 
+@Html.IncludeJs("/Scripts/CanvasModel.js")
+<div class="canvas-container">
+    <canvas width="1200" height="1200" id="test-canvas"></canvas>
+</div>
+<script>
+    var canvas = new CanvasModel('test-canvas');
+</script>
+
 
 @Html.IncludeJs("/Scripts/ApiPromiser.js")
 @Html.IncludeJs("/Scripts/Account/AccountApi.js")
