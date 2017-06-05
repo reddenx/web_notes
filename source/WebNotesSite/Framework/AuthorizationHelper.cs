@@ -76,6 +76,10 @@ namespace WebNotesSite.Framework
 
         public static bool AuthorizeUserMvc(Cache cache, HttpRequestBase request)
         {
+            var test = new WebNotes.Persistence.Repositories.ITestAccountRepository();
+            test.GetStuff();
+
+
             var authToken = HttpContext.Current.Request.Cookies[AUTH_COOKIE_KEY]?.Value;
             return AuthorizeUser(cache, authToken);
         }

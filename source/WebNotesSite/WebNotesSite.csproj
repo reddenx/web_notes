@@ -185,6 +185,16 @@
   <ItemGroup>
     <Folder Include="Views\Shared\Partials\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebNotes.Core\WebNotes.Core.csproj">
+      <Project>{38d09af8-7e22-4f46-93d3-70f3c9fb264d}</Project>
+      <Name>WebNotes.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebNotes.Persistence\WebNotes.Persistence.csproj">
+      <Project>{e3433674-73b2-4c22-84eb-de87aad8a27a}</Project>
+      <Name>WebNotes.Persistence</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
