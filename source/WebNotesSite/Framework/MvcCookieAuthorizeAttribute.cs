@@ -7,6 +7,7 @@ using WebNotesSite.Models.Persistence;
 
 namespace WebNotesSite.Framework
 {
+    [Obsolete]
     public class MvcCookieAuthorizeAttribute : AuthorizeAttribute
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)

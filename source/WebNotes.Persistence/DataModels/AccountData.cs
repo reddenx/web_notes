@@ -8,7 +8,7 @@ namespace WebNotes.Persistence.DataModels
 {
     public class AccountData
     {
-        public int AccountId { get; set; }
+        public int AccountId;
 
         public string Username;
         public string Email;

@@ -11,6 +11,7 @@ namespace WebNotesSite.Data
     /// <summary>
     /// uh, this complicated mess synchronizes webcache and file data
     /// </summary>
+    [Obsolete]
     public static class CachedDataAccess
     {
         public static string StoragePath;

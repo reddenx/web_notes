@@ -17,6 +17,7 @@ using WebNotesSite.Models.Persistence;
 
 namespace WebNotesSite.Api
 {
+    [Obsolete]
     [RoutePrefix("json")]
     public class NoteController : ApiController
     {

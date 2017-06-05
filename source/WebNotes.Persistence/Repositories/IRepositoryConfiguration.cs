@@ -8,7 +8,7 @@ namespace WebNotes.Persistence.Repositories
 {
     public interface IRepositoryConfiguration
     {
-        string UserSqlConnectionString { get; }
+        string AccountSqlConnectionString { get; }
         string NoteSqlConnectionString { get; }
     }
 }

@@ -128,6 +128,8 @@
     <Compile Include="Data\CachedDataAccess.cs" />
     <Compile Include="Framework\ApiCookieAuthorizeAttribute.cs" />
     <Compile Include="Framework\AuthorizationHelper.cs" />
+    <Compile Include="Framework\CustomAuthenticationAttribute.cs" />
+    <Compile Include="Framework\CustomIdentity.cs" />
     <Compile Include="Framework\EventExtensions.cs" />
     <Compile Include="Framework\MvcCookieAuthorizeAttribute.cs" />
     <Compile Include="Framework\HtmlHelperExtensions.cs" />

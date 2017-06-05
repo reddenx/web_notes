@@ -8,6 +8,7 @@ using System.Web.Http.Controllers;
 
 namespace WebNotesSite.Framework
 {
+    [Obsolete]
     public class ApiCookieAuthorizeAttribute : AuthorizeAttribute
     {
         protected override bool IsAuthorized(HttpActionContext actionContext)

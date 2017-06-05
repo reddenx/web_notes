@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using WebNotesSite.Framework;
 
 namespace WebNotesSite
 {
@@ -19,6 +20,11 @@ namespace WebNotesSite
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            //security
+
+            //GlobalConfiguration.Configuration.Filters.Add(new ApiCookieAuthorizeAttribute());
+            GlobalConfiguration.Configuration.Filters.Add(new CustomAuthenticationAttribute());
         }
     }
 }

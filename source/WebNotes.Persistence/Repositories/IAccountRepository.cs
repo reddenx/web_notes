@@ -14,14 +14,66 @@ namespace WebNotes.Persistence.Repositories
         AccountData GetAccount(int accountId);
         AccountData GetAccountByEmail(string email);
         AccountData GetAccountByUsername(string username);
+        AccountData GetAccountByRecentToken(string token);
     }
 
-    public class ITestAccountRepository
+    internal class AccountRepository : IAccountRepository
     {
-        public void GetStuff()
+        private readonly string AccountConnectionString;
+
+        public AccountRepository(IRepositoryConfiguration config)
         {
-            var connection = new MySqlConnection("Server=localhost;Port=3306;Database=accounts;Uid=note_website;Pwd=9b1166a2a3204a3b83400042188ba20f;");
-            var results = connection.Query<AccountTableData>("select * from vw_accounts");
+            AccountConnectionString = config.AccountSqlConnectionString;
+        }
+
+        public AccountData GetAccount(int accountId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AccountData GetAccountByEmail(string email)
+        {
+            using (var connection = new MySqlConnection(AccountConnectionString))
+            {
+                var results = connection.Query<AccountTableData>("select * from vw_accounts a where a.Email = @Email",
+                    new
+                    {
+                        Email = email
+                    });
+
+                return results?.FirstOrDefault()?.ToAccountData();
+            }
+        }
+
+        public AccountData GetAccountByRecentToken(string token)
+        {
+            var bytes = token.ToBase64Binary();
+            using (var connection = new MySqlConnection(AccountConnectionString))
+            {
+                var results = connection.Query<AccountTableData>("select * from vw_accounts where AuthToken = @AuthToken",
+                    new
+                    {
+                        AuthToken = bytes
+                    });
+
+                return results?.FirstOrDefault()?.ToAccountData();
+            }
+        }
+
+        public AccountData GetAccountByUsername(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AccountData[] GetStuff()
+        {
+            using (var connection = new MySqlConnection(AccountConnectionString))
+            {
+                var results = connection.Query<AccountTableData>("select * from vw_accounts a where a.Email = @Email");
+                return results.Select(tableData => new AccountData()
+                {
+                }).ToArray();
+            }
         }
 
         private class AccountTableData
@@ -33,6 +85,18 @@ namespace WebNotes.Persistence.Repositories
             public byte[] PasswordSalt;
             public byte[] AuthToken;
             public DateTime TokenExpiration;
+
+            public AccountData ToAccountData()
+            {
+                return new AccountData()
+                {
+                    AccountId = this.AccountId,
+                    AuthToken = this.AuthToken.ToBase64(),
+                    Email = this.Email,
+                    PasswordHash = this.PasswordHash.ToBase64(),
+                    PasswordSalt = this.PasswordSalt.ToBase64(),
+                };
+            }
         }
     }
 }

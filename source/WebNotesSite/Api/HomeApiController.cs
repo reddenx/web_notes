@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace WebNotesSite.Api
 {
+    [Obsolete]
     [RoutePrefix("json")]
     public class HomeApiController : ApiController
     {

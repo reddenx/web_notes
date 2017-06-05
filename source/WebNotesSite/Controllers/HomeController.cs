@@ -10,6 +10,7 @@ using WebNotesSite.Models.Persistence;
 
 namespace WebNotesSite.Controllers
 {
+    [Obsolete]
     [RoutePrefix("")]
     public class HomeController : Controller
     {

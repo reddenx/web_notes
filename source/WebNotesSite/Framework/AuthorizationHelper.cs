@@ -24,6 +24,7 @@ namespace WebNotesSite.Framework
     /// 
     /// 
     /// </summary>
+    [Obsolete]
     public static class AuthorizationHelper
     {
         private const string AUTH_COOKIE_KEY = "notes_app_auth_token";
@@ -76,10 +77,6 @@ namespace WebNotesSite.Framework
 
         public static bool AuthorizeUserMvc(Cache cache, HttpRequestBase request)
         {
-            var test = new WebNotes.Persistence.Repositories.ITestAccountRepository();
-            test.GetStuff();
-
-
             var authToken = HttpContext.Current.Request.Cookies[AUTH_COOKIE_KEY]?.Value;
             return AuthorizeUser(cache, authToken);
         }
